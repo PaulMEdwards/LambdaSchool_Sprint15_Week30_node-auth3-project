@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const generateToken = require('../middleware/jwt.js');
 
 const Users = require('../users/users-model.js');
 
@@ -32,7 +32,7 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
   let userData = req.body;
-  console.log(`TCL: user input`, userData);
+  console.log(`TCL: login -> user input`, userData);
 
   if (!userData.username || !userData.password) {
     res.status(400).json({ message: `Required data missing` });
@@ -41,13 +41,25 @@ router.post('/login', (req, res) => {
     Users.readUserByName(username)
       .first()
       .then(user => {
-        console.log(`TCL: user found\n`, user);
-        if (user && bcrypt.compareSync(userData.password, user.password)) {
-          req.session.user = user;
-          res.status(200).json({ message: `Welcome ${user.username}!`, userData: user });
+        console.log(`TCL: login -> user found\n`, user);
+        if (user) {
+          const b = bcrypt.compareSync(userData.password, user.password);
+          console.log(`TCL: login -> b =`, b);
+          if (b) {
+            const token = generateToken(user);
+            console.log(`TCL: login -> token =`, token);
+            // req.session.user = user;
+            res.status(200).json({
+              message: `Welcome ${user.username}!`,
+              // userData: user,
+              token,
+            });
+          } else {
+            res.status(401).json({ message: `Invalid Credentials` });
+          };
         } else {
-          res.status(401).json({ message: `Invalid Credentials` });
-        }
+          res.status(404).json({ message: `Invalid User` });
+        };
       })
       .catch(err => {
         res.status(500).json(err);

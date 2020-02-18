@@ -7,7 +7,7 @@ const auth = require('../middleware/auth');
 router.post('/', auth, (req, res) => {
   const userData = req.body;
 
-  if (!userData.username || !userData.password) {
+  if (!userData.username || !userData.password || !userData.department) {
     res.status(400).json({ message: `Required data missing` });
   } else {
     Users.createUser(userData)
