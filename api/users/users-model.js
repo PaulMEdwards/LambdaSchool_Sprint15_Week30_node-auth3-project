@@ -3,6 +3,7 @@ const db = require('../../data/dbConfig.js');
 module.exports = {
   createUser,
   readUsers,
+  readUsersInMyDept,
   readUserById,
   readUserByName,
   updateUser,
@@ -21,6 +22,14 @@ function createUser(user) {
 
 function readUsers() {
   return db("users");
+};
+function readUsersInMyDept(department) {
+  if (department) {
+    return db("users")
+      .where("department", department);
+  } else {
+    return null;
+  };
 };
 function readUserById(id) {
   if (id) {

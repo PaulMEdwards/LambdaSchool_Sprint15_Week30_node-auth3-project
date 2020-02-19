@@ -3,6 +3,7 @@ const router = require('express').Router();
 const Users = require('./users-model.js');
 
 const auth = require('../middleware/auth');
+const checkRole = require('../middleware/check-role');
 
 router.post('/', auth, (req, res) => {
   const userData = req.body;
@@ -20,8 +21,17 @@ router.post('/', auth, (req, res) => {
   };
 });
 
-router.get('/', auth, (req, res) => {
+router.get('/all', auth, checkRole(['Legal','Executive']), (req, res) => {
   Users.readUsers()
+    .then(users => {
+      res.json(users);
+    })
+    .catch(err => {
+      res.status(500).json({ message: `Failed to get users` });
+    });
+});
+router.get('/', auth, (req, res) => {
+  Users.readUsersInMyDept(req.decodedJwt.department)
     .then(users => {
       res.json(users);
     })
