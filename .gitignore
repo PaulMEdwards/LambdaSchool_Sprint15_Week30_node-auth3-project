@@ -111,3 +111,6 @@ dist
 
 # Sqlite DBs
 *.db3
+
+# Configuration
+config/
