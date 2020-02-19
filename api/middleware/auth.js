@@ -1,5 +1,3 @@
-// const Users = require('../users/users-model.js');
-// const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const secrets = require('../config/secrets.js');
 
