@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
-const generateToken = require('../middleware/jwt.js');
+const jwt = require('../middleware/jwt.js');
 
 const Users = require('../users/users-model.js');
 
@@ -46,12 +46,10 @@ router.post('/login', (req, res) => {
           const b = bcrypt.compareSync(userData.password, user.password);
           console.log(`TCL: login -> b =`, b);
           if (b) {
-            const token = generateToken(user);
+            const token = jwt.generateToken(user);
             console.log(`TCL: login -> token =`, token);
-            // req.session.user = user;
             res.status(200).json({
               message: `Welcome ${user.username}!`,
-              // userData: user,
               token,
             });
           } else {
