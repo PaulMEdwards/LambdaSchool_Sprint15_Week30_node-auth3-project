@@ -14,7 +14,8 @@ const sessionConfig = {
     httpOnly: true
   },
   resave: false,
-  saveUninitialized: false,
+  rolling: true,
+  saveUninitialized: true,
   store: new knexSessionStore({
     knex: require('../../data/dbConfig.js'),
     tablename: 'sessions',
