@@ -1,0 +1,2001 @@
+{
+	"info": {
+		"_postman_id": "12902596-92b2-475e-ad5c-380734dda256",
+		"name": "LS_Sp15_Wk30_node-auth3-project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "POST /api/register (missing required data)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b6bd3b5-3913-4ebd-937c-93f56dae29a5",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Failure', () => {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test('Data Size', () => {",
+									"    pm.expect(res.user).to.be.undefined;",
+									"});",
+									"",
+									"pm.test('Data Value(s)', () => {",
+									"    pm.expect(res.message).to.equal(\"Required data missing\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST /api/register (missing required data)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/register",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23-k/F9z98s0+ugeNZx+iEQXV7rMp4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 18 Feb 2020 04:59:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Required data missing\"\n}"
+						}
+					]
+				},
+				{
+					"name": "POST /api/register (valid)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "84d20fc1-f559-4506-8cda-8c9c242e8369",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Success', () => {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test('Data Value(s)', () => {",
+									"    pm.expect(res.id).to.be.at.least(2);",
+									"});",
+									"",
+									"//Store generated account ID for reuse in subsequent tests",
+									"var uid = res.id;",
+									"pm.collectionVariables.set(\"UserID\", uid);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"TestUser\",\n\t\"password\": \"T3$tP4$$w0rd!\",\n\t\"department\": \"Legal\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST /api/register (valid)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"TestUser\",\n\t\"password\": \"T3$tP4$$w0rd!\",\n\t\"department\": \"Legal\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/register",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "126"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7e-aPD/DgHlqrNhfzdAYfZ+D2FdO7s\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 19 Feb 2020 11:44:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 12,\n    \"username\": \"TestUser\",\n    \"password\": \"$2a$12$spK7ppFBDeVCamjtrBg5RuIiX7PHU0AXQtR71TV6vtddFWpOiogMi\",\n    \"department\": \"Legal\"\n}"
+						}
+					]
+				},
+				{
+					"name": "POST /api/login (missing required data)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b6bd3b5-3913-4ebd-937c-93f56dae29a5",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Failure', () => {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test('Data Size', () => {",
+									"    pm.expect(res.userData).to.be.undefined;",
+									"});",
+									"",
+									"pm.test('Data Value(s)', () => {",
+									"    pm.expect(res.message).to.equal(\"Required data missing\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST /api/login (missing required data)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/login",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23-k/F9z98s0+ugeNZx+iEQXV7rMp4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 18 Feb 2020 05:04:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Required data missing\"\n}"
+						}
+					]
+				},
+				{
+					"name": "POST /api/login (valid)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "84d20fc1-f559-4506-8cda-8c9c242e8369",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Success', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Data Size', () => {",
+									"    pm.expect(res.token).to.not.be.undefined;",
+									"});",
+									"pm.collectionVariables.set(\"JWT\", res.token);",
+									"",
+									"pm.test('Data Value(s)', () => {",
+									"    pm.expect(res.message).to.equal(\"Welcome TestUser!\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"TestUser\",\n\t\"password\": \"T3$tP4$$w0rd!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST /api/login (valid)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"TestUser\",\n\t\"password\": \"T3$tP4$$w0rd!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/login",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "168"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a8-W8i0NIadQnao5zLVTdQgG6LwlGk\""
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "session=s%3A3OBeRNCBXdo8_xws4Pgo6fkwrtpQAuXp.h%2F9sjB62xto%2Fc5V0dBK8P%2F9YIj%2FTLRF8dFCxoeDXfNo; Path=/; Expires=Tue, 18 Feb 2020 06:37:37 GMT; HttpOnly"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 18 Feb 2020 05:37:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Welcome TestUser!\",\n    \"userData\": {\n        \"id\": 12,\n        \"username\": \"TestUser\",\n        \"password\": \"$2a$12$ywiD8ahHG2o2flpk9BegD.uQuwRN4cgBrhyHWmqneMRU7sb6Tus32\",\n        \"department\": \"test\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "GET /api/users (missing token)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f0f3c8ca-fcc2-4eb5-a6c9-b6e40e6eba58",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Unauthorized', () => {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test('Data Value(s)', () => {",
+									"    pm.expect(res.message).to.equal(\"Missing token.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET /api/users (missing token)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/users",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c-PNN1jDK8vfErKNM6sllr5JWldI8\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 19 Feb 2020 11:13:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Missing token.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GET /api/users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f0f3c8ca-fcc2-4eb5-a6c9-b6e40e6eba58",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Success', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Data Size', () => {",
+									"    pm.expect(res.length).to.be.at.least(5);",
+									"});",
+									"",
+									"pm.test('Data Value(s)', () => {",
+									"    pm.expect(res[4].username).to.equal(\"TestUser\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{JWT}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET /api/users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{JWT}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/users",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "642"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"282-WOq0ryOt4J6viJXEUBc0ra1kUr8\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 19 Feb 2020 11:44:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 4,\n        \"username\": \"EddieValiant\",\n        \"password\": \"$2a$12$LK67jA2KpdFx4dPsFDbXOeQZLPuwP4vhjnEGsSrzkQV3E/RYc..he\",\n        \"department\": \"Legal\"\n    },\n    {\n        \"id\": 5,\n        \"username\": \"JudgeDoom\",\n        \"password\": \"$2a$12$dIu4OEE2vhigU.83ly6D.u.dvyJTr2CIE394f8FwB1MZgy/GMDrCq\",\n        \"department\": \"Legal\"\n    },\n    {\n        \"id\": 8,\n        \"username\": \"LtSantino\",\n        \"password\": \"$2a$12$t8tb/LO3za7VuEPCEj.QL.qpWYcjrphvCdWtdzJRnAjV/eSysIXZm\",\n        \"department\": \"Legal\"\n    },\n    {\n        \"id\": 9,\n        \"username\": \"TeddyValiant\",\n        \"password\": \"$2a$12$cxcav5DJLxVr0rQ.53ZQNeASnG4Bm1SCafIuWWNtJaK1EDFQCUNKu\",\n        \"department\": \"Legal\"\n    },\n    {\n        \"id\": 12,\n        \"username\": \"TestUser\",\n        \"password\": \"$2a$12$spK7ppFBDeVCamjtrBg5RuIiX7PHU0AXQtR71TV6vtddFWpOiogMi\",\n        \"department\": \"Legal\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GET /api/users/all",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f0f3c8ca-fcc2-4eb5-a6c9-b6e40e6eba58",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Success', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Data Size', () => {",
+									"    pm.expect(res.length).to.be.at.least(11);",
+									"});",
+									"",
+									"pm.test('Data Value(s)', () => {",
+									"    pm.expect(res[11].username).to.equal(\"TestUser\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{JWT}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/all",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"all"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET /api/users/all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{JWT}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/users/all",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1571"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"623-6cgtCc+pzgC1uOp+v4UyOCxTva0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 19 Feb 2020 11:46:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"username\": \"RogerRabbit\",\n        \"password\": \"$2a$12$O5/reO6GvLCcEKzWzOdh6uRLcGhuaK0JDoLk8bS0yh8T1lfcWNo0W\",\n        \"department\": \"Talent\"\n    },\n    {\n        \"id\": 2,\n        \"username\": \"BabyHerman\",\n        \"password\": \"$2a$12$kNH3wmB/EIjKDsiYZPcK1eU0Z1GxhyvQYNV.a7oWiJWjMk2Z3B9kW\",\n        \"department\": \"Talent\"\n    },\n    {\n        \"id\": 3,\n        \"username\": \"JessicaRabbit\",\n        \"password\": \"$2a$12$dprA9OzM323cgVaTHu/V9.YJlfkZtNuUNXpis9xlIMGWubbj2FWa.\",\n        \"department\": \"Accounting\"\n    },\n    {\n        \"id\": 4,\n        \"username\": \"EddieValiant\",\n        \"password\": \"$2a$12$LK67jA2KpdFx4dPsFDbXOeQZLPuwP4vhjnEGsSrzkQV3E/RYc..he\",\n        \"department\": \"Legal\"\n    },\n    {\n        \"id\": 5,\n        \"username\": \"JudgeDoom\",\n        \"password\": \"$2a$12$dIu4OEE2vhigU.83ly6D.u.dvyJTr2CIE394f8FwB1MZgy/GMDrCq\",\n        \"department\": \"Legal\"\n    },\n    {\n        \"id\": 6,\n        \"username\": \"BennyTheCab\",\n        \"password\": \"$2a$12$u8//j3xe9pdWQCKy/juMA.004wDEbMGH7Bz1xGe9U7Rwi9a.mXxgm\",\n        \"department\": \"Transportation\"\n    },\n    {\n        \"id\": 7,\n        \"username\": \"Dolores\",\n        \"password\": \"$2a$12$hecpQT8D9IIcgoKb1kXGOepaO4XSixXUjxA9odbXeqntF54N1pN.O\",\n        \"department\": \"Food Service\"\n    },\n    {\n        \"id\": 8,\n        \"username\": \"LtSantino\",\n        \"password\": \"$2a$12$t8tb/LO3za7VuEPCEj.QL.qpWYcjrphvCdWtdzJRnAjV/eSysIXZm\",\n        \"department\": \"Legal\"\n    },\n    {\n        \"id\": 9,\n        \"username\": \"TeddyValiant\",\n        \"password\": \"$2a$12$cxcav5DJLxVr0rQ.53ZQNeASnG4Bm1SCafIuWWNtJaK1EDFQCUNKu\",\n        \"department\": \"Legal\"\n    },\n    {\n        \"id\": 10,\n        \"username\": \"RKMaroon\",\n        \"password\": \"$2a$12$7qdSFumCrx0fM8hSffzq4OIV8oS.kmIlqaEG0DqHDJ4K8xLbTq6hm\",\n        \"department\": \"Executive\"\n    },\n    {\n        \"id\": 11,\n        \"username\": \"MarvinAcme\",\n        \"password\": \"$2a$12$QxwOKbldiCskXksyYzzRU..O34vsOOyDaiSYxKlhyZzBOOfa0vfaS\",\n        \"department\": \"Executive\"\n    },\n    {\n        \"id\": 12,\n        \"username\": \"TestUser\",\n        \"password\": \"$2a$12$spK7ppFBDeVCamjtrBg5RuIiX7PHU0AXQtR71TV6vtddFWpOiogMi\",\n        \"department\": \"Legal\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GET /api/users/:userId (not found)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "133dafd8-cfda-4da0-9b8a-3190d8c83402",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Failure', () => {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test('Data Size', () => {",
+									"    pm.expect(res.userData).to.be.undefined;",
+									"});",
+									"",
+									"pm.test('Error Message', () => {",
+									"    pm.expect(res.message).to.equal(\"Could not get user with given id\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{JWT}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/999",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"999"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET /api/users/:userId (not found)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/users/999",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"999"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-ZzerwnZ8oNjcoUIxNX1mKUKkamw\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Feb 2020 08:54:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Could not get user with given id\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GET /api/users/:userId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a935735f-f00c-49cb-b097-afdfcc2f6613",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Success', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Data Value(s)', () => {",
+									"    pm.expect(res.userData.username).to.equal(\"TestUser\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{JWT}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/{{UserID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{UserID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET /api/users/:userId",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/users/{{UserID}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"{{UserID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "138"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8a-yA+pwpHQMbfn6RXAsbOaGZDP6Ms\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 18 Feb 2020 05:39:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userData\": {\n        \"id\": 12,\n        \"username\": \"TestUser\",\n        \"password\": \"$2a$12$ywiD8ahHG2o2flpk9BegD.uQuwRN4cgBrhyHWmqneMRU7sb6Tus32\",\n        \"department\": \"test\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "GET /api/users/:userName (not found)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "133dafd8-cfda-4da0-9b8a-3190d8c83402",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Failure', () => {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test('Data Size', () => {",
+									"    pm.expect(res.userData).to.be.undefined;",
+									"});",
+									"",
+									"pm.test('Error Message', () => {",
+									"    pm.expect(res.message).to.equal(\"Could not get user with given name\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{JWT}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/TestUserWhichDoesNotExist",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"TestUserWhichDoesNotExist"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET /api/users/:userName (not found)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/users/TestUserWhichDoesNotExist",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"TestUserWhichDoesNotExist"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30-KDe0q1kVZnlV6x2qUObB6BdTOVo\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Feb 2020 08:56:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Could not get user with given name\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GET /api/users/:userName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a935735f-f00c-49cb-b097-afdfcc2f6613",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Success', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Data Value(s)', () => {",
+									"    pm.expect(res.userData.username).to.equal(\"TestUser\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{JWT}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/TestUser",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"TestUser"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET /api/users/:userName",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/users/TestUser",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"TestUser"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "138"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8a-yA+pwpHQMbfn6RXAsbOaGZDP6Ms\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 18 Feb 2020 05:39:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userData\": {\n        \"id\": 12,\n        \"username\": \"TestUser\",\n        \"password\": \"$2a$12$ywiD8ahHG2o2flpk9BegD.uQuwRN4cgBrhyHWmqneMRU7sb6Tus32\",\n        \"department\": \"test\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "POST /api/logout (valid)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "84d20fc1-f559-4506-8cda-8c9c242e8369",
+						"exec": [
+							"var res = pm.response.json();",
+							"",
+							"pm.test('Success', () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Data Value(s)', () => {",
+							"    pm.expect(res.message).to.equal('Logged out.');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/logout",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "POST /api/logout (valid)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/logout",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "25"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"19-RG5Ww2w6CRFkiUofOLzO4EFQSro\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 18 Feb 2020 05:05:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Logged out.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GET /api",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "195c2eb1-cc8e-4ea4-9b87-eeca2f9dedb4",
+						"exec": [
+							"// var res = pm.response.json();",
+							"",
+							"pm.test('No Content', () => {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET /api",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"a-bAsFyilMr4Ra1hIU5PyoyFRunpI\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 18 Feb 2020 04:58:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "b00ac0ff-3502-44ae-82fe-bc8bed1d4086",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "63f74736-9217-4572-8303-0602299d5ec6",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "833c4bdc-1e68-4b81-8639-1d7cd9f65b3d",
+			"key": "UserID",
+			"value": 12,
+			"type": "number"
+		},
+		{
+			"id": "4fcf5a00-ac34-4590-8c63-35f7650279ca",
+			"key": "SessionCookie",
+			"value": "s%3Aurf32TAK2lAsbbGEBGjsv7LbDmtteHdi.TxWHFYrthEHuX0S0CYM5XyxCtIRW6tF3b3P2uwluAuk",
+			"type": "string"
+		},
+		{
+			"id": "ff896753-840e-4236-809a-e7800a0458ec",
+			"key": "JWT",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInVzZXJuYW1lIjoiVGVzdFVzZXIiLCJkZXBhcnRtZW50IjoiTGVnYWwiLCJpYXQiOjE1ODIxMTI2ODMsImV4cCI6MTU4MjE5OTA4M30.nfduLFzy4hUL27bQ2RTOe2DLMj4Bq1HU4aWsjgXGax4",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
